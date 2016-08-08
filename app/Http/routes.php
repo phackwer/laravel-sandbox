@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json(['status' => 'OK']);
 });
+
+Route::resource('currency', 'CurrencyController');
+Route::resource('event', 'EventController');
+Route::resource('exchangerate', 'ExchangeRateController');
+Route::resource('partner', 'PartnerController');

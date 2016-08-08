@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Model\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Currency extends Model
 {
     //
 }
