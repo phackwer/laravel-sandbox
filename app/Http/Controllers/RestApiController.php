@@ -50,6 +50,7 @@ class RestApiController extends Controller
     }
 
     /**
+     * Default route to show that the controller is up and running on desired path
      * @Route("/", methods={"GET"} )
      */
     public function index($data = null)
@@ -72,7 +73,7 @@ class RestApiController extends Controller
         $dataPost[static::SORTFIELDS]  = isset($dataPost[static::SORTFIELDS]) ? $dataPost[static::SORTFIELDS] : null;
         $dataPost[static::SORTDIR]     = isset($dataPost[static::SORTDIR]) ? $dataPost[static::SORTDIR] : null;
 
-        $data = $this->getService()->getAll(
+        $data = $this->getService()->pagedSearch(
             $dataPost[static::PAGESIZE],
             $dataPost[static::CURRENTPAGE],
             $dataPost[static::FILTERS],
@@ -106,10 +107,9 @@ class RestApiController extends Controller
      */
     public function show($id = null)
     {
-        $data = $this->getService()->getBy('id', $id);
+        $data = $this->getService()->find('id', $id);
         response()->json($data);
     }
-
 
     /**
      * @Route("/{id:[0-9]+}", methods={"DELETE"} )
