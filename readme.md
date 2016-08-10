@@ -20,6 +20,9 @@ And access this for a non restfull report data service
 
 http://127.0.0.1/xpreso/public/index.php/payments
 
+Exchange rates were based on this crazy source:
+https://www.gov.uk/government/publications/hmrc-exchange-rates-for-2016-monthly
+
 Changes made so far:
 
 0 - Used migrations for database creation and sowing (artisan migrate, artisan seed)
@@ -29,4 +32,4 @@ Changes made so far:
     BusinessServiceProvider, Repository and Model which are named similarly
 3 - Create an App\Model layer separating BusinessServiceProviders, Model Entities
     and Repositories on a better, making it easir to find business rules
-4 - Started the Angular frontend on separated project.
+4 - Output report data as a JSON object. Conversion can be easily made for any format
