@@ -2,6 +2,9 @@
 
 namespace App\Model;
 
+/**
+ *  Business service provider specially tailored to handle Model Entities
+ */
 class ModelBusinessServiceProvider extends BusinessServiceProvider
 {
 

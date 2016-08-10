@@ -2,6 +2,11 @@
 
 namespace App\Model;
 
+/**
+ * Generic repository with generic queries to support all the
+ * generic things a generic API should generically do.
+ * Generally speaking, general stuff. XD
+ */
 class Repository extends BusinessServiceProvider
 {
     /**

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
+/**
+ * Here is where all magic happens.
+ */
 class RestApiController extends Controller
 {
     /**
@@ -78,6 +81,42 @@ class RestApiController extends Controller
     }
 
     /**
+     * Get an Entity data
+     *
+     * @Route("/{id:[0-9]+}", methods={"GET"} )
+     */
+    public function show($id = null)
+    {
+        $data = $this->getService()->getBy('id', $id);
+        return response()->json($data);
+    }
+
+    /**
+     * Persist an Entity data
+     *
+     * @Route("/", methods={"PUT"} )
+     */
+    public function put($data = null)
+    {
+        $data     = json_decode(json_encode($this->request->getJsonRawBody(), JSON_NUMERIC_CHECK), true);
+        $response = $this->getService()->save($data)->toArray();
+        return response()->json($response);
+    }
+
+    /**
+     * Remove an Entity from database
+     *
+     * @Route("/{id:[0-9]+}", methods={"DELETE"} )
+     */
+    public function delete($id)
+    {
+        $this->getService()->delete($id);
+        return response()->json(['form' => 'deleted']);
+    }
+
+    /**
+     * Search and returns matching entities with a paged and ordered resultset
+     *
      * @Route("/", methods={"POST"} )
      */
     public function search()
@@ -107,33 +146,5 @@ class RestApiController extends Controller
         $response[static::SORTDIR]     = $dataPost[static::SORTDIR];
 
         return response()->json($response);
-    }
-
-    /**
-     * @Route("/", methods={"PUT"} )
-     */
-    public function put($data = null)
-    {
-        $data     = json_decode(json_encode($this->request->getJsonRawBody(), JSON_NUMERIC_CHECK), true);
-        $response = $this->getService()->save($data)->toArray();
-        return response()->json($response);
-    }
-
-    /**
-     * @Route("/{id:[0-9]+}", methods={"GET"} )
-     */
-    public function show($id = null)
-    {
-        $data = $this->getService()->getBy('id', $id);
-        return response()->json($data);
-    }
-
-    /**
-     * @Route("/{id:[0-9]+}", methods={"DELETE"} )
-     */
-    public function delete($id)
-    {
-        $this->getService()->delete($id);
-        return response()->json(['form' => 'deleted']);
     }
 }

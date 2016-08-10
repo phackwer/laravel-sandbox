@@ -4,6 +4,9 @@ namespace App\Model;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Base for the automated business service provider layer
+ */
 class BusinessServiceProvider extends ServiceProvider
 {
     /**
