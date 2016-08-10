@@ -25,6 +25,13 @@ class Event extends ModelBusinessServiceProvider
     {
         /**
          * rules
+         * 1 - Partners are getting paid 4 days after their payment period. If by any chance
+         *     the payment date is a weekend, then they are getting paid the first Wednesday
+         *     after that.
+         * 2 - Payment Intervals:
+         *     * Weekly payments intervals: (1 - 7, 8 - 15, 16 - 23, 24 - End of the month)
+         *     * Bi-Weekly payments intervals: (1 - 15, 16 - End of the month) 
+         *     * Monthly payments intervals: (1 - End of the month) 
          */
     }
 }
