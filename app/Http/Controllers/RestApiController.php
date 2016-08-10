@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class RestApiController extends Controller
 {
+    /**
+     * The application instance.
+     *
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    protected $app;
+
     /**
      * $service Nome da Service para a Controller
      *
@@ -28,6 +34,17 @@ class RestApiController extends Controller
     const BUSINESSCLASS = '\Phalcony\Core\Business\ModelBusiness';
 
     /**
+     * Create a new service provider instance.
+     *
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @return void
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
+    /**
      * Returns the controller respective service provider by "guessing"
      *
      * @TODO - Find a better and leaner way to do it than messing around with strings
@@ -39,10 +56,10 @@ class RestApiController extends Controller
         if (is_null($this->service)) {
             $arr                  = explode('\\', get_class($this));
             $arr[count($arr) - 3] = 'Model';
-            $arr[count($arr) - 2] = 'BusinessService';
+            $arr[count($arr) - 2] = 'BusinessServiceProvider';
             $arr[count($arr) - 1] = str_replace('Controller', '', $arr[count($arr) - 1]);
             $this->service        = implode('\\', $arr);
-            $this->service        = new $this->service;
+            $this->service        = new $this->service($this->app);
         } else if (is_string($this->service)) {
             $this->service = new $this->service;
         }
@@ -73,7 +90,7 @@ class RestApiController extends Controller
         $dataPost[static::SORTFIELDS]  = isset($dataPost[static::SORTFIELDS]) ? $dataPost[static::SORTFIELDS] : null;
         $dataPost[static::SORTDIR]     = isset($dataPost[static::SORTDIR]) ? $dataPost[static::SORTDIR] : null;
 
-        $data = $this->getService()->pagedSearch(
+        $data = $this->getService()->getPagedSearch(
             $dataPost[static::PAGESIZE],
             $dataPost[static::CURRENTPAGE],
             $dataPost[static::FILTERS],
@@ -107,7 +124,7 @@ class RestApiController extends Controller
      */
     public function show($id = null)
     {
-        $data = $this->getService()->find('id', $id);
+        $data = $this->getService()->getBy('id', $id);
         response()->json($data);
     }
 

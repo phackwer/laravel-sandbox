@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Model\BusinessService;
+namespace App\Model;
 
 use Illuminate\Support\ServiceProvider;
 
-abstract class AbstractBusinessServiceProvider extends ServiceProvider
+class BusinessServiceProvider extends ServiceProvider
 {
     /**
      * Errors array to be treated before sending to the frontend
@@ -38,5 +38,19 @@ abstract class AbstractBusinessServiceProvider extends ServiceProvider
     public function getErrors()
     {
         return $this->_errors;
+    }
+
+    public function getApp()
+    {
+        return $this->app;
+    }
+
+    /**
+     * [setApp description]
+     * @param \Illuminate\Contracts\Foundation\Application  $app
+     */
+    public function setApp($app)
+    {
+        $this->app = $app;
     }
 }

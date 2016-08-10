@@ -2,7 +2,9 @@
 
 namespace App\Model\Repository;
 
-class Event extends AbstractRepository
+use App\Model\Repository;
+
+class Event extends Repository
 {
 
 }

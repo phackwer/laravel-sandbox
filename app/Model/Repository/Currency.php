@@ -2,7 +2,9 @@
 
 namespace App\Model\Repository;
 
-class Currency extends AbstractRepository
+use App\Model\Repository;
+
+class Currency extends Repository
 {
 
 }

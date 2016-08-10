@@ -15,7 +15,19 @@ Route::get('/', function () {
     return response()->json(['status' => 'OK']);
 });
 
-Route::resource('currency', 'CurrencyController');
-Route::resource('event', 'EventController');
-Route::resource('exchangerate', 'ExchangeRateController');
-Route::resource('partner', 'PartnerController');
+$dsp = DIRECTORY_SEPARATOR;
+
+/**
+ * Automatically register all controllers routes
+ * @var [type]
+ */
+$controllers = glob(app_path().$dsp.'Http'.$dsp.'Controllers'.$dsp.'*');
+foreach ($controllers as $controller) {
+    $controller = explode(DIRECTORY_SEPARATOR, $controller);
+    $controllerName = str_replace('Controller.php', '', $controller[count($controller) - 1]);
+    Route::resource(strtolower($controllerName), $controllerName.'Controller');
+}
+// Route::resource('currency', 'CurrencyController');
+// Route::resource('event', 'EventController');
+// Route::resource('exchangerate', 'ExchangeRateController');
+// Route::resource('partner', 'PartnerController');

@@ -2,7 +2,9 @@
 
 namespace App\Model\Repository;
 
-class Partner extends AbstractRepository
+use App\Model\Repository;
+
+class Partner extends Repository
 {
 
 }

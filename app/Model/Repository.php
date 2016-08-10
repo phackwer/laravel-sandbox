@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model\BusinessService;
+namespace App\Model;
 
-class AbstractRepository
+class Repository extends BusinessServiceProvider
 {
     /**
      * Nome da classe da Model deste Repository
@@ -70,7 +70,7 @@ class AbstractRepository
             $arr               = explode('\\', $modelClass);
             $modelAbsoluteName = array_pop($arr);
             $tableName         = \Phalcon\Text::uncamelize($modelAbsoluteName);
-            $this->model->setDataSource($tableName);
+            $this->model->setTable($tableName);
         }
 
         return $this->model = ($this->model ? $this->model : new $this->modelClass);
@@ -174,12 +174,12 @@ class AbstractRepository
     {
         $model = $model ? $model : $this->getModelInstance();
 
-        $model = $model->find([
+        $models = $model->where([
             'conditions' => $attribute . ' = ?0',
             'bind'       => [$value],
-        ]);
+        ])->get();
 
-        return isset($model[0]) ? $model[0] : null;
+        return ;
     }
 
     /**
@@ -192,22 +192,13 @@ class AbstractRepository
      */
     public function persistModel($model)
     {
-        try {
-            $txManager   = $this->getDI()->get('transactionManager');
-            $transaction = $txManager->get();
-            $model->setTransaction($transaction);
-            $this->errors = $model->save() ? null : $model->getMessages();
+        $this->errors = $model->save() ? null : $model->getMessages();
 
-            if (count($this->errors)) {
-                throw new ModelException;
-            }
-
-            $transaction->commit();
-
-            return $model;
-
-        } catch (TxFailed $e) {
-            throw $e;
+        if (count($this->errors)) {
+            throw new ModelException;
         }
+
+        return $model;
+
     }
 }

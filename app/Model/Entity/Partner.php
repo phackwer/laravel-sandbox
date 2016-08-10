@@ -2,7 +2,7 @@
 
 namespace App\Model\Entity;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model\Model;
 
 class Partner extends Model
 {

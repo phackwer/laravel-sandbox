@@ -2,7 +2,9 @@
 
 namespace App\Model\Repository;
 
-class ExchangeRate extends AbstractRepository
+use App\Model\Repository;
+
+class ExchangeRate extends Repository
 {
 
 }
