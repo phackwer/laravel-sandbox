@@ -11,4 +11,7 @@ use App\Model\Model;
  */
 class Currency extends Model
 {
+    const GBP = 1;
+    const EUR = 2;
+    const USD = 3;
 }

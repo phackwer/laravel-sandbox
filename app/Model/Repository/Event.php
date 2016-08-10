@@ -25,9 +25,8 @@ class Event extends Repository
         $year  = 2016;
         $month = 1;
 
-        $model = $this->getModelInstance();
-
-        return $model
+        return $this
+            ->getModelInstance()
             ->whereYear('event_timestamp', '=', (string) str_pad($year, 4, '0', STR_PAD_LEFT))
             ->whereMonth('event_timestamp', '=', (string) str_pad($month, 2, '0', STR_PAD_LEFT))
             ->get();

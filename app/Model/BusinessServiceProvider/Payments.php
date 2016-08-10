@@ -44,7 +44,7 @@ class Payments extends BusinessServiceProvider
                 'Event timestamp'       => $event['event_timestamp'],
                 'Partner'               => $event['partner_id'],
                 'Possible Pay day'      => $payDay,
-                'Converted Value (GBP)' => number_format($payValue, 2, '.', ','),
+                'Converted Value (EUR)' => number_format($payValue, 2, '.', ','),
                 'Original Value'        => number_format($event['event_value'], 2, '.', ','),
                 'Original Currency'     => $event['currency_id'],
             ];
