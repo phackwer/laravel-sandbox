@@ -34,16 +34,19 @@ class Payments extends BusinessServiceProvider
          * Events that will be processed
          * @var array
          */
-        $events   = $eventSrv->getEventsForPeriod($year, $month);
+        $events = $eventSrv->getEventsForPeriod($year, $month);
 
         foreach ($events as $k => $event) {
             $payDay   = $eventSrv->calculateEventPayDay($event['event_timestamp']);
             $payValue = $exchangeSrv->getConvertedValue($event['event_timestamp'], $event['event_value'], $event['currency_id']);
 
             $data[$k] = [
-                'Partner' => $event['partner_id'],
-                'Pay day' => $payDay,
-                'Amount' => $payValue
+                'Event timestamp'       => $event['event_timestamp'],
+                'Partner'               => $event['partner_id'],
+                'Possible Pay day'      => $payDay,
+                'Converted Value (GBP)' => $payValue,
+                'Original Value'        => $payValue,
+                'Original Currency'     => $payValue,
             ];
         }
 
