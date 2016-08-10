@@ -34,3 +34,10 @@ Changes made so far:
 - Create an App\Model layer separating BusinessServiceProviders, Model Entities
     and Repositories on a better, making it easir to find business rules
 - Output report data as a JSON object. Conversion can be easily made for any format
+
+@TODOS
+- Get the Model and Rule validations layers all set up
+- Use the Respect validation library from Henrique Moody (Yo, bro!)
+- Create a vendor for the abstract classes
+- Create a module structure with auto registers for services and routes
+- Get annotations working on Laravel

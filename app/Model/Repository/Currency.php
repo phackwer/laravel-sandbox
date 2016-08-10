@@ -6,5 +6,4 @@ use App\Model\Repository;
 
 class Currency extends Repository
 {
-
 }

@@ -94,6 +94,7 @@ class Repository extends BusinessServiceProvider
         $this->getModel();
     }
 
+    //CODE NEED CONVERSION FROM PHALCON TO LARAVEL
     // /**
     //  * obtém os filtros para pesquisa, tratados um a um
     //  *
