@@ -12,12 +12,41 @@ class Payments extends BusinessServiceProvider
 {
     /**
      * [getPaymentReportData description]
-     * @return [type] [description]
-     *
-     * @Route("/{year:[0-9]+}/{month:[0-9]+}", methods={"GET"} )
+     * @return array [description]
      */
-    public function getPaymentReportData()
+    public function getPaymentReportData($year = null, $month = null)
     {
+        /**
+         * Report Data
+         * @var array
+         */
+        $data = [];
 
+        /**
+         * Services used for this
+         */
+        /** @var Event Events service */
+        $exchangeSrv = new ExchangeRate($this->app);
+        /** @var Event Events service */
+        $eventSrv = new Event($this->app);
+
+        /**
+         * Events that will be processed
+         * @var array
+         */
+        $events   = $eventSrv->getEventsForPeriod($year, $month);
+
+        foreach ($events as $k => $event) {
+            $payDay   = $eventSrv->calculateEventPayDay($event['event_timestamp']);
+            $payValue = $exchangeSrv->getConvertedValue($event['event_timestamp'], $event['event_value'], $event['currency_id']);
+
+            $data[$k] = [
+                'Partner' => $event['partner_id'],
+                'Pay day' => $payDay,
+                'Amount' => $payValue
+            ];
+        }
+
+        return $data;
     }
 }

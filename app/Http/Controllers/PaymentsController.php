@@ -19,7 +19,7 @@ class PaymentsController extends ServiceController
      *
      * @Route("/{year:[0-9]+}/{month:[0-9]+}", methods={"GET"} )
      */
-    public function show()
+    public function index($data = null)
     {
         $data = $this->getService()->getPaymentReportData();
         return response()->json($data);

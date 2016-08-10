@@ -43,6 +43,9 @@ class BusinessServiceProvider extends ServiceProvider
         return $this->_errors;
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application
+     */
     public function getApp()
     {
         return $this->app;
