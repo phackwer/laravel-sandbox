@@ -33,5 +33,19 @@ class Event extends ModelBusinessServiceProvider
          *     * Bi-Weekly payments intervals: (1 - 15, 16 - End of the month) 
          *     * Monthly payments intervals: (1 - End of the month) 
          */
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $date);
+        $day = $date->format('d');
+        $period = (int)($day / 7) + 1;
+        $baseDate = ($period * 7);
+        $payday = $baseDate + 4;
+        $date->setDate($date->format('Y'), $date->format('m'), $payday);
+        if ($date->format('N') == 6 || $date->format('N') == 7) {
+            while ($date->format('N') != 4) {
+                $date->setDate($date->format('Y'), $date->format('m'), ($date->format('d') + 1));
+            }
+        }
+
+        return $date;
+
     }
 }
