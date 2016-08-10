@@ -72,7 +72,7 @@ class RestApiController extends Controller
      */
     public function index($data = null)
     {
-        response()->json(
+        return response()->json(
             array('msg' => 'OK')
         );
     }
@@ -106,7 +106,7 @@ class RestApiController extends Controller
         $response[static::SORTFIELDS]  = $dataPost[static::SORTFIELDS];
         $response[static::SORTDIR]     = $dataPost[static::SORTDIR];
 
-        response()->json($response);
+        return response()->json($response);
     }
 
     /**
@@ -116,7 +116,7 @@ class RestApiController extends Controller
     {
         $data     = json_decode(json_encode($this->request->getJsonRawBody(), JSON_NUMERIC_CHECK), true);
         $response = $this->getService()->save($data)->toArray();
-        response()->json($response);
+        return response()->json($response);
     }
 
     /**
@@ -125,7 +125,7 @@ class RestApiController extends Controller
     public function show($id = null)
     {
         $data = $this->getService()->getBy('id', $id);
-        response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -134,6 +134,6 @@ class RestApiController extends Controller
     public function delete($id)
     {
         $this->getService()->delete($id);
-        response()->json(['form' => 'deleted']);
+        return response()->json(['form' => 'deleted']);
     }
 }

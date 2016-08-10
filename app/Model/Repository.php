@@ -174,12 +174,9 @@ class Repository extends BusinessServiceProvider
     {
         $model = $model ? $model : $this->getModelInstance();
 
-        $models = $model->where([
-            'conditions' => $attribute . ' = ?0',
-            'bind'       => [$value],
-        ])->get();
+        $models = $model->where($attribute, $value)->get();
 
-        return ;
+        return $models;
     }
 
     /**
