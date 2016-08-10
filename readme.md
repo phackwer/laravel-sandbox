@@ -16,6 +16,10 @@ http://127.0.0.1/xpreso/public/index.php/event/1
 http://127.0.0.1/xpreso/public/index.php/exchangerate/1
 http://127.0.0.1/xpreso/public/index.php/partner/1
 
+And access this for a non restfull report data service
+
+http://127.0.0.1/xpreso/public/index.php/payments
+
 Changes made so far:
 
 0 - Used migrations for database creation and sowing (artisan migrate, artisan seed)

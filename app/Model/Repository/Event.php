@@ -7,7 +7,7 @@ use App\Model\Repository;
 class Event extends Repository
 {
     /**
-     *
+     * Get events from database to a given year and month
      *
      * @param  int $year  [description]
      * @param  int $month [description]
@@ -29,7 +29,7 @@ class Event extends Repository
 
         return $model
             ->whereYear('event_timestamp', '=', (string) str_pad($year, 4, '0', STR_PAD_LEFT))
-            ->whereMonth('event_timestamp', '=',(string) str_pad($month, 2, '0', STR_PAD_LEFT))
+            ->whereMonth('event_timestamp', '=', (string) str_pad($month, 2, '0', STR_PAD_LEFT))
             ->get();
     }
 }

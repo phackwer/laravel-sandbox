@@ -94,80 +94,80 @@ class Repository extends BusinessServiceProvider
         $this->getModel();
     }
 
-    /**
-     * obtém os filtros para pesquisa, tratados um a um
-     *
-     * @param  array $filters
-     */
-    public function getSearchFilters($filters)
-    {
-        $conditions = '';
-        $and        = '';
+    // /**
+    //  * obtém os filtros para pesquisa, tratados um a um
+    //  *
+    //  * @param  array $filters
+    //  */
+    // public function getSearchFilters($filters)
+    // {
+    //     $conditions = '';
+    //     $and        = '';
 
-        if (is_array($filters) && count($filters)) {
-            foreach ($filters as $attr => $value) {
-                $conditions .= $and . $attr . ' = ' . $value . '';
-                $and = ' and ';
-            }
-        }
+    //     if (is_array($filters) && count($filters)) {
+    //         foreach ($filters as $attr => $value) {
+    //             $conditions .= $and . $attr . ' = ' . $value . '';
+    //             $and = ' and ';
+    //         }
+    //     }
 
-        return $conditions;
-    }
+    //     return $conditions;
+    // }
 
-    /**
-     * Obtém listagem com base em filtro
-     *
-     * @param  integer $limit
-     * @param  integer $offset
-     * @param  array $filters
-     * @param  string $sortFields [description]
-     * @param  string $sortDirections [description]
-     * @return array
-     */
-    public function pagedSearch($limit, $offset, $filters = array(), $sortFields = 'id', $sortDirections = 'ASC')
-    {
-        $conditions = $this->getSearchFilters($filters);
+    // /**
+    //  * Obtém listagem com base em filtro
+    //  *
+    //  * @param  integer $limit
+    //  * @param  integer $offset
+    //  * @param  array $filters
+    //  * @param  string $sortFields [description]
+    //  * @param  string $sortDirections [description]
+    //  * @return array
+    //  */
+    // public function pagedSearch($limit, $offset, $filters = array(), $sortFields = 'id', $sortDirections = 'ASC')
+    // {
+    //     $conditions = $this->getSearchFilters($filters);
 
-        $data = [];
-        if ($conditions) {
-            $data['conditions'] = $conditions;
-        }
+    //     $data = [];
+    //     if ($conditions) {
+    //         $data['conditions'] = $conditions;
+    //     }
 
-        if ($sortFields) {
-            $data['order'] = $sortFields . ' ' . $sortDirections;
-        }
+    //     if ($sortFields) {
+    //         $data['order'] = $sortFields . ' ' . $sortDirections;
+    //     }
 
-        if ($conditions) {
-            $data['limit'] = $limit;
-        }
+    //     if ($conditions) {
+    //         $data['limit'] = $limit;
+    //     }
 
-        if ($offset && $limit) {
-            $data['offset'] = (($offset - 1) * $limit);
-        }
+    //     if ($offset && $limit) {
+    //         $data['offset'] = (($offset - 1) * $limit);
+    //     }
 
-        $model = $this->getModel();
+    //     $model = $this->getModel();
 
-        return $model->find($data);
-    }
+    //     return $model->find($data);
+    // }
 
-    /**
-     * Contagem total com base nos filtros passados
-     *
-     * @return [type] [description]
-     */
-    public function countGetAll($filters = array())
-    {
-        $model = $this->getModel();
+    // /**
+    //  * Contagem total com base nos filtros passados
+    //  *
+    //  * @return [type] [description]
+    //  */
+    // public function countGetAll($filters = array())
+    // {
+    //     $model = $this->getModel();
 
-        $conditions = $this->getSearchFilters($filters);
+    //     $conditions = $this->getSearchFilters($filters);
 
-        $data = [];
-        if ($conditions) {
-            $data['conditions'] = $conditions;
-        }
+    //     $data = [];
+    //     if ($conditions) {
+    //         $data['conditions'] = $conditions;
+    //     }
 
-        return count($model->find($data));
-    }
+    //     return count($model->find($data));
+    // }
 
     /**
      * Obtém os dados da pessoa utilizando um atributo

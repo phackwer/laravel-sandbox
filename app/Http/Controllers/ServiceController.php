@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Http\Request;
 
 /**
  * Here is where all magic happens.

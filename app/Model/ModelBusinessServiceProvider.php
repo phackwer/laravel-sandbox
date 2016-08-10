@@ -54,7 +54,7 @@ class ModelBusinessServiceProvider extends BusinessServiceProvider
     public function setRepositoryClass($repositoryClass)
     {
         $this->
-repositoryClass = $repositoryClass;
+            repositoryClass = $repositoryClass;
     }
 
     /**
@@ -75,7 +75,7 @@ repositoryClass = $repositoryClass;
     public function getRelatedClass($attr, $namespace, $sufix = '')
     {
         if (is_null($this->$attr)) {
-            $arr = explode('\\', get_class($this));
+            $arr                  = explode('\\', get_class($this));
             $arr[count($arr) - 2] = $namespace;
             $arr[count($arr) - 1] = str_replace(
                 array('Service', 'Business'),
@@ -119,11 +119,11 @@ repositoryClass = $repositoryClass;
         $this->getRelatedClass('modelClass', 'Model');
 
         if (!class_exists($this->modelClass)) {
-            $this->model = new Model;
-            $modelClass = $this->modelClass;
-            $arr = explode('\\', $modelClass);
+            $this->model       = new Model;
+            $modelClass        = $this->modelClass;
+            $arr               = explode('\\', $modelClass);
             $modelAbsoluteName = array_pop($arr);
-            $tableName = \Phalcon\Text::uncamelize($modelAbsoluteName);
+            $tableName         = \Phalcon\Text::uncamelize($modelAbsoluteName);
             $this->model->setDataSource($tableName);
         }
 
@@ -200,8 +200,8 @@ repositoryClass = $repositoryClass;
     public function getModelInstance($data = array())
     {
         $this->model = (isset($data['id']) && $data['id']) ?
-            $this->getBy('id', $data['id']) :
-            $this->getModel();
+        $this->getBy('id', $data['id']) :
+        $this->getModel();
         return $this->model;
     }
 
