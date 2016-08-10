@@ -1,27 +1,28 @@
-# Laravel PHP Framework
+# Laravel Sandbox
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Use:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Wherever you put the application, fix the .env file to point to the SQLite database.
+In this case I placed it at:
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+/var/www/html/xpreso
 
-## Official Documentation
+For studying pourposes
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Access the below routes for accessing register 1 of each type:
 
-## Contributing
+http://127.0.0.1/xpreso/public/index.php/currency/1
+http://127.0.0.1/xpreso/public/index.php/event/1
+http://127.0.0.1/xpreso/public/index.php/exchangerate/1
+http://127.0.0.1/xpreso/public/index.php/partner/1
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Changes made so far:
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+0 - Used migrations for database creation and sowing (artisan migrate, artisan seed)
+1 - app\HTTP\routes.php - added auto register of controller routes
+2 - Create the RestApiController with JSON only output to add RESTFul automatic
+    routes to all controllers that inherit from here and also automatically use a
+    BusinessServiceProvider, Repository and Model which are named similarly
+3 - Create an App\Model layer separating BusinessServiceProviders, Model Entities
+    and Repositories on a better, making it easir to find business rules
+4 - Started the Angular frontend on separated project.
