@@ -19,6 +19,14 @@ $dsp = DIRECTORY_SEPARATOR;
 
 /**
  * Automatically register all controllers routes
+ * Otherwise you would have to declare each one like this:
+ *
+ * Route::resource('currency', 'CurrencyController');
+ * Route::resource('event', 'EventController');
+ * Route::resource('exchangerate', 'ExchangeRateController');
+ * Route::resource('partner', 'PartnerController');
+ * ... (imagine 50 controllers?!?!?!)
+ *
  * @var [type]
  */
 $controllers = glob(app_path().$dsp.'Http'.$dsp.'Controllers'.$dsp.'*');
@@ -29,7 +37,3 @@ foreach ($controllers as $controller) {
         Route::resource(strtolower($controllerName), $controllerName.'Controller');
     }
 }
-// Route::resource('currency', 'CurrencyController');
-// Route::resource('event', 'EventController');
-// Route::resource('exchangerate', 'ExchangeRateController');
-// Route::resource('partner', 'PartnerController');
